@@ -100,7 +100,7 @@ public class MyFile {
             System.out.println("Ultima Modificacion        -    Tipo    -  Tamaño   -   Nombre");
             for (File f : file.listFiles()) {
                 if (f.isFile()) {
-                    System.out.println(new Date(f.lastModified()) + "    FILE      " + f.length() + " KB          " + f.getName());
+                    System.out.println(new Date(f.lastModified()) + "    FILE      " + (f.length()/1024) + " KB          " + f.getName());
                     sumaFiles += f.length();
                     contF++;
                 } else if (f.isDirectory()) {
@@ -111,7 +111,7 @@ public class MyFile {
             }
             
         double espacioLibre = file.getFreeSpace() / (1024*1024*1024);
-            System.out.println("\n"+contF + " Archivos " + sumaFiles + " KB");
+            System.out.println("\n"+contF + " Archivos " + String.format("%.2f", sumaFiles/1024) + " KB");
             System.out.println(contD + " Directorios " + String.format("%.2f", espacioLibre) + " GB libres");
         } else {
             System.out.println("No hay nada que mostrar.");
