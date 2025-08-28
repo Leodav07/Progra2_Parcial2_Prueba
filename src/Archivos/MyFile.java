@@ -62,7 +62,7 @@ public class MyFile {
 
             if (file != null) {
                 for (File f : file.listFiles()) {
-                 borrar(f);
+                    borrar(f);
                 }
             }
 
@@ -74,20 +74,52 @@ public class MyFile {
     public File getFile() {
         return file;
     }
-    
-    private void tree(File dir, String tab){
-        if(dir.isDirectory()){
-            System.out.println(tab+dir.getName());
-            for(File f : dir.listFiles()){
-                if(!f.isHidden()){
-                    tree(f, tab+"--");
+
+    private void tree(File dir, String tab) {
+        if (dir.isDirectory()) {
+            System.out.println(tab + dir.getName());
+            for (File f : dir.listFiles()) {
+                if (!f.isHidden()) {
+                    tree(f, tab + "--");
                 }
             }
         }
-        
+
     }
-    
-    void tree(){
+
+    void tree() {
         tree(file, "-");
+    }
+
+    public void MostarDir() {
+        double sumaFiles = 0;
+        int contF = 0, contD = 0;
+        if(file.isDirectory()){
+        if (file.exists()) {
+            System.out.println("\nDirectorio de: " + file.getAbsolutePath() + "\n");
+            System.out.println("Ultima Modificacion        -    Tipo    -  Tamaño   -   Nombre");
+            for (File f : file.listFiles()) {
+                if (f.isFile()) {
+                    System.out.println(new Date(f.lastModified()) + "    FILE      " + f.length() + " KB          " + f.getName());
+                    sumaFiles += f.length();
+                    contF++;
+                } else if (f.isDirectory()) {
+                    System.out.println(new Date(f.lastModified()) + "    <DIR>      " + " -           " + f.getName());
+                    contD++;
+                }
+
+            }
+            
+        double espacioLibre = file.getFreeSpace() / (1024*1024*1024);
+            System.out.println("\n"+contF + " Archivos " + sumaFiles + " KB");
+            System.out.println(contD + " Directorios " + String.format("%.2f", espacioLibre) + " GB libres");
+        } else {
+            System.out.println("No hay nada que mostrar.");
+
+        }
+    }else{
+            System.out.println("Esta opción solamente es habilitada para directorios.");
+        }
+        
     }
 }

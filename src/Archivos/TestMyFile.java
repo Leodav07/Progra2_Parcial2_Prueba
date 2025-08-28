@@ -27,7 +27,8 @@ public class TestMyFile {
             System.out.println("4- Crear folder");
             System.out.println("5- Borrar Arhcivo/Folder");
             System.out.println("6- Listar");
-            System.out.println("7- Salir");
+            System.out.println("7- Mostrar Detalles");
+            System.out.println("8- Salir");
             System.out.print("Elija una opción: ");
             try {
                 option = leer.nextInt();
@@ -56,6 +57,10 @@ public class TestMyFile {
                     case 6:
                         mf.tree();
                         break;
+                        
+                    case 7: 
+                        mf.MostarDir();
+                        break;
                 }
             } catch (InputMismatchException e) {
                 leer.nextLine();
@@ -66,7 +71,7 @@ public class TestMyFile {
                 System.out.println("Error en Disco: "+e.getMessage());
             }
 
-        } while (option != 7);
+        } while (option != 8);
     }
    private static void set(){
        System.out.println("Dirección: ");
